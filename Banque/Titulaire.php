@@ -1,17 +1,17 @@
 <?php
-class titulaire{
+class Titulaire{
     private $_nom;
     private $_prenom;
     private $_dateNaissance;
     private $_ville;
-    private $_comptesBancaires = [];
+    private array $_comptesBancaires ;
 
-    public function __construct($prenom,$nom,$dateNaissance, $ville,$comptesBancaires) {
+    public function __construct($prenom,$nom,$dateNaissance, $ville) {
         $this->_nom = $nom;
         $this->_prenom = $prenom;
         $this->_dateNaissance=$dateNaissance;
         $this->_ville=$ville;
-        $this->_comptesBancaires=$comptesBancaires;
+        $this->_comptesBancaires= [];
     }
 
     public function get_nom() {
@@ -50,14 +50,22 @@ class titulaire{
         $this->_comptesBancaires;
     }
 
+    public function ajouterComptes (compteBancaire $compte) {
+        $this->_comptesBancaires[]= $compte;
+    }
+        //fonction pour afficher les comptes 
+    Public function afficherComptes(){
+        echo "<br> <strong>Releve d'identité bancaire: </strong><br>" ;
+        foreach($this->_comptesBancaires as $compte){
+            echo  $compte . "<br>";
+        }
+    }
+
+
     public function __toString() {
-        return $this->_prenom . " " . $this->_nom ." né(e) le " . $this->_dateNaissance . 
-        " et habite à" .$this->_ville.", n° compte bancaire" . $this->_comptesBancaires."<br>";
+        return $this->_prenom . " " . $this->_nom ."<br> 
+        Né(e) le " . $this->_dateNaissance . "<br>
+        Domiciliant à " .$this->_ville."<br>";
     }
 }
 
-$titulaireA = new titulaire("Jon","Snow","07/02/1993","TheWall","banquepopulaire");
-//var_dump($titulaireA);
-echo $titulaireA ;
-$titulaireB = new titulaire("Eren","Jager","22/11/2001","Shiganshina","Caisse d'epargne");
-echo $titulaireB;
