@@ -50,7 +50,7 @@ class Client{
 
     // fonct° AddReservation un objet qui va permettre d'ajoute une reservation au client 
     // on pour pourra l'appeler dans chambre et hotel 
-    public function ajouterReservation(Reservation $reservation){
+    public function ajouterReservations(Reservation $reservation){
         $this->_reservations[] =$reservation;
 
     }

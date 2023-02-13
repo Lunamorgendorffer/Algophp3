@@ -56,7 +56,7 @@ $resa3= new Reservation("01-04-2021","01-04-2021",$client2,$hotel1,$chambreC);
 <div>
     <h3>Reservation de l'hotel <?php echo $hotel2->getNomHotel().$hotel2->get_nbEtoile().$hotel2->get_ville() ?></h3>
     <div>
-    <?php echo $hotel2->get_reservations()?>
+    <?php echo $hotel2->nbReservations()?>
     </div>
 </div>
 

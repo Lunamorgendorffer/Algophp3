@@ -95,7 +95,7 @@ class Chambre{
     }
 
 
-    public function ajouterReservation(Reservation $reservation){
+    public function ajouterReservations(Reservation $reservation){
         $this->_reservations[] =$reservation;
 
     }

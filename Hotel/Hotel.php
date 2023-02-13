@@ -97,16 +97,41 @@ class Hotel{
          return $chambreDispo; 
         
     }
-   
 
     public function ajouterChambre(Chambre $chambre){
         $this->_chambres[] =$chambre;
 
     }
-    public function ajouterReservation(Reservation $reservation){
+
+    public function afficherChambres(){
+        foreach($this->chambres as $hotel){
+            echo $hotel;
+        }
+    }
+
+    public function ajouterReservations(Reservation $reservation){
         $this->_reservations[] =$reservation;
 
     } 
+
+    public function afficherReservations(){
+        foreach($this->reservations as $reservation){
+            echo $reservation;
+         }
+ 
+    }
+
+    public function nbReservations(){
+        $nbChambreReservees = count($this->_reservations);
+        $nbChambreDispos = 0;
+        
+        if (count($this->_chambres) != 0){
+            echo $nbChambreReservees  ;
+            
+        }else{
+            echo " Aucune réservation ";
+        }
+    }
 
     
     public function afficherHotel(){
@@ -114,6 +139,8 @@ class Hotel{
         //quand il y a tableau pour afficher le nombre qui ets à l'interieur, il faut inclure "count"
         return $this->_adresse."<br> Nombre de chambres: ".count($this->_chambres)."<br> Nombre de chambres reservées: ".count($this->_reservations)."<br> Nombre de chambres dispo: ".$this->calculerChambreDispo()."<br>";
     }
+
+    
 
     public function __toString(){
         return $this->_nomHotel;

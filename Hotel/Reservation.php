@@ -8,19 +8,15 @@ class Reservation{
     private Chambre $chambre;
     private array $_reservations;
     
-    public function __construct($dateDebut,$dateFin,$client,$hotel,$chambre){
+    public function __construct($dateDebut,$dateFin,Client $client,Hotel $hotel,Chambre $chambre){
         $this->_dateDebut = new DateTime($dateDebut); //ici on  attribut à la proprieté le format est une date 
         $this->_dateFin = new DateTime ($dateFin);//ici on  attribut à la proprieté le format est une date 
         $this->client = $client;
-        // ici on fait appelle à la fonction ajout reservation de l'objet client(class client) 
-        $client->ajouterReservation($this);
+        $client->ajouterReservations($this);// ici on fait appelle à la fonction ajout reservation de l'objet client(class client) 
         $this->hotel = $hotel;
-        // ici on fait appelle à la fonction ajout reservation de l'objet hotel(class hotel)
-        $hotel->ajouterReservation($this);
-        // ici on fait appelle à la fonction ajout  reservation de l'objet chambre (class chambre)
+        $hotel->ajouterReservations($this);// ici on fait appelle à la fonction ajout reservation de l'objet hotel(class hotel)
         $this->chambre= $chambre;
-        $chambre->ajouterReservation($this);
-        $this->_reservations=[];
+        $chambre->ajouterReservations($this);// ici on fait appelle à la fonction ajout  reservation de l'objet chambre (class chambre)
         
     }
 
@@ -125,22 +121,11 @@ class Reservation{
         return $this;
     }
 
-    public function ajouterReservation(Reservation $reservation){
-        $this->_reservations[] =$reservation;
-
-    }
-
-
 
     public function afficherResa() {
         /*On crée uen fonction qui affiche le sinfo de la reservation. 
         ATT: pour l'affichage des dates, il faut inclure "format", sinon l'ordinateur sera incapable d'afficher les dates */
         return "-".$this->client." Chambre ".$this->chambre ." du ".$this->_dateDebut->format('d-m-Y')." au ".$this->_dateFin->format('d-m-Y')." ".$this->hotel."<br>";
-        foreach($this->_reservations as $reservation){
-            echo $reservation;
-        }
-            echo "Aucune réservation !";
-    
     }
 
     public function __toString(){
