@@ -18,7 +18,7 @@ class Hotel{
         $this->_reservations=[];
     }
     
-   
+    //Fonctions GET & SET des propriétes 
     public function getNomHotel(){
         return $this->_nomHotel;
     }
@@ -76,52 +76,6 @@ class Hotel{
 
     public function get_reservations()
     {
-        return $this->_reservations;
-    }
-
-     
-    public function set_reservation($_reservations)
-    {
-        $this->_reservations = $_reservations;
-
-        return $this;
-    }
-
-
-    public function calculerChambreDispo (){
-        // 1) compter le nb de chambre dans l'hotel count ($this->chambres)
-        // 2) compter le nb de chambre reservés   count ($this->reservations)
-        // 3) soustration entre les 2 count ($this->chambres) - count ($this->reservations)
-        // 4) return $chambreDispo 
-         $chambreDispo= count($this->_chambres)- count($this->_reservations);
-         return $chambreDispo; 
-        
-    }
-
-    public function ajouterChambre(Chambre $chambre){
-        $this->_chambres[] =$chambre;
-
-    }
-
-    public function afficherChambres(){
-        foreach($this->chambres as $hotel){
-            echo $hotel;
-        }
-    }
-
-    public function ajouterReservations(Reservation $reservation){
-        $this->_reservations[] =$reservation;
-
-    } 
-
-    public function afficherReservations(){
-        foreach($this->reservations as $reservation){
-            echo $reservation;
-         }
- 
-    }
-
-    public function nbReservations(){
         $nbChambreReservees = count($this->_reservations);
         $nbChambreDispos = 0;
         
@@ -133,14 +87,56 @@ class Hotel{
         }
     }
 
+     
+    public function set_reservation($_reservations)
+    {
+        $this->_reservations = $_reservations;
+
+        return $this;
+    }
+
+    // fonction pour calculer le nombre de chambre dispo
+    public function calculerChambreDispo (){
+        // 1) compter le nb de chambre dans l'hotel count ($this->chambres)
+        // 2) compter le nb de chambre reservés   count ($this->reservations)
+        // 3) soustration entre les 2 count ($this->chambres) - count ($this->reservations)
+        // 4) return $chambreDispo 
+         $chambreDispo= count($this->_chambres)- count($this->_reservations);
+         return $chambreDispo; 
+        
+    }
+    //Fonction pour dès qu'on crée une chambre, celle ci va s'ajouter au tableau de chambre
+    public function ajouterChambre(Chambre $chambre){
+        $this->_chambres[] =$chambre;
+
+    }
+    //Fonction pour afficher chambre 
+    public function afficherChambres(){
+        foreach($this->chambres as $hotel){
+            echo $hotel;
+        }
+    }
     
+    //Fonction pour dès qu'on crée une reservation, celle ci va s'ajouter au tableau de reservation 
+    public function ajouterReservations(Reservation $reservation){
+        $this->_reservations[] =$reservation;
+
+    } 
+    //Fonction pour afficher les resa 
+    public function afficherReservations(){
+        foreach($this->reservations as $reservation){
+            echo $reservation;
+         }
+ 
+    }
+
+    //Fonction pour afficher info hotel 
     public function afficherHotel(){
 
         //quand il y a tableau pour afficher le nombre qui ets à l'interieur, il faut inclure "count"
         return $this->_adresse."<br> Nombre de chambres: ".count($this->_chambres)."<br> Nombre de chambres reservées: ".count($this->_reservations)."<br> Nombre de chambres dispo: ".$this->calculerChambreDispo()."<br>";
     }
 
-    
 
     public function __toString(){
         return $this->_nomHotel;
