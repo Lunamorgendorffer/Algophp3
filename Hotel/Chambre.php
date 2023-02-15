@@ -6,10 +6,11 @@ class Chambre{
     private bool $_wifi=false;
     private Hotel $hotel;
     private int $_prix;
+    private $_statut;
     private array $_reservations; 
 
     
-    public function __construct($numChambre,$nbLit,$wifi,$hotel,$prix){
+    public function __construct($numChambre,$nbLit,$wifi,$hotel,$prix,$statut){
         $this->_numChambre=$numChambre;
         $this->_nbLit=$nbLit;
         $this->_wifi= $wifi;
@@ -18,9 +19,12 @@ class Chambre{
         Et quand on cree une chambre, il faut ajouter au tableau de chambre*/
         $hotel->ajouterChambre($this);
         $this->_prix= $prix;
+        $this->_statut= $statut;
         $this->_reservations=[];
 
     }
+
+    //Fonctions GET & SET des propriétes 
 
     public function get_numChambre()
     {
@@ -94,21 +98,25 @@ class Chambre{
         return $this;
     }
 
+    public function get_statut(){
+        if ($this->_statut == true){
+            return "<button class='uk-button uk-button-danger'>Réserver</button>";
+        }else{
+            return "<button class='uk-button uk-button-primary'>Disponible</button>";
+        }
+    }
 
+    //Fonction pour dès qu'on crée une reservation, celle ci va s'ajouter au tableau de reservation 
     public function ajouterReservations(Reservation $reservation){
         $this->_reservations[] =$reservation;
 
     }
 
+    //Fonction pour afficher les info de la chambre 
     public function afficherChambre(){
-        return "Chambre: ".$this->_numChambre." (".$this->_nbLit." - ".$this->_prix." € - Wifi: ".$this->get_wifi() .")";
+        return "Chambre: ".$this->_numChambre." (".$this->_nbLit." lit(s) - ".$this->_prix." € - Wifi: ".$this->get_wifi() .")";
     }
 
-    public function prixTotalChambre($total){
-        //total = prix de la chambre1 + prix de la chambre2
-        return $total = $this->_prix + $this->_prix;
-        
-    }
 
     public function __toString(){
         return $this->_numChambre." ";  
