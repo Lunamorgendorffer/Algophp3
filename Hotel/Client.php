@@ -8,11 +8,10 @@ class Client{
     public function __construct($prenom,$nom) {
         $this->_nom = $nom;
         $this->_prenom = $prenom;
-        $this->_reservations=[];
-       
-        
+        $this->_reservations=[]; 
     }
 
+    //Fonctions GET & SET des propriétes 
     public function get_nom() {
         return $this->_nom;
     }
@@ -32,10 +31,6 @@ class Client{
     public function get_reservations()
     {
 
-        // if($this->_reservations == true){
-        //     return count ($this->_reservations);
-        // }
-        // return "Aucune reservation en cours !";
 
         return $this->_reservations;
     }
@@ -53,6 +48,17 @@ class Client{
     public function ajouterReservations(Reservation $reservation){
         $this->_reservations[] =$reservation;
 
+    }
+
+    // fonction qui permett de calculer le prix de toutes les reservations 
+    public function totalReservations(){
+        $somme=0;
+        foreach ($this->_reservations as $reservation){
+            // de la reservation, on va chercher la classe chambre (et comme on acces à la classe Chambre dans la classe reservation) , 
+            //on a acces au propriété de la classe chambre = chainage 
+            $somme+=$reservation->getChambre()->get_prix();
+        }
+        return $somme;
     }
 
     
